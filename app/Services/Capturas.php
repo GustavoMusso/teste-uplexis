@@ -46,7 +46,9 @@ class Capturas
                     'id_usuario' => Auth::user()->id,
                 ];
 
-                $this->insereArtigo($dados);
+                $return = $this->insereArtigo($dados);
+
+                return $return;
             }
 
         } catch (\Exception $e) {
