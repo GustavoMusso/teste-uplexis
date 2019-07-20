@@ -14,7 +14,7 @@ class CapturaController extends Controller
 
     public function index()
     {
-        return view('captura.index');
+        return view('captura');
     }
 
     public function captura(Request $request)

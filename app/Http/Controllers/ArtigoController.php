@@ -17,7 +17,7 @@ class ArtigoController extends Controller
         $parametros = $request->all();
         $artigos = $this->artigo->filtrar($parametros);
 
-        return view('artigos.index', compact('artigos', 'parametros'));
+        return view('artigos', compact('artigos', 'parametros'));
     }
 
     public function delete(Request $id)
