@@ -31,6 +31,11 @@ class Artigos
         return $this->model->where($campo, $valor)->get($colunas);
     }
 
+    public function filtrar($busca)
+    {
+        return $this->model->where('titulo', 'LIKE', '%' . $busca . '%')->paginate();
+    }
+
     public function inserir(array $dados)
     {
         return $this->model->create($dados);
