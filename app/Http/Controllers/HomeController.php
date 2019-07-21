@@ -23,16 +23,17 @@ class HomeController extends Controller
 
     public function create()
     {
-        return view('captura');
+        $msg = [];
+        return view('captura' , compact('msg'));
     }
 
     public function store(Request $request)
     {
         $pesquisa = $request->get('pesquisa') ?? '';
 
-        $status = $this->captura->buscaArtigos($pesquisa);
+        $msg = $this->captura->buscaArtigos($pesquisa);
 
-        return $status;
+        return view('captura' , compact('msg'));
     }
 
     public function delete($id)

@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h1 class="text-center">Artigos</h1>
+        <h1 class="text-center">Meus Artigos</h1>
 
         <table class="table table-striped table-hover">
             <thead>
@@ -29,6 +29,8 @@
             @endforelse
             </tbody>
         </table>
+
+        {{ $artigos->links() }}
     </div>
 @endsection
 

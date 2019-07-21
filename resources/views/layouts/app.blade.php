@@ -45,7 +45,7 @@
                 <ul class="navbar-nav ml-auto">
                     @if (isset(\Auth::user()->id) && !empty(\Auth::user()->id))
                         <li class="nav-item dropdown">
-                            <a class="dropdown-item" href="{{ route('logout') }}"
+                            <a class="nav-link" href="{{ route('logout') }}"
                                onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}
@@ -66,6 +66,7 @@
     </main>
 </div>
 
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 @yield('js')
 </body>
 </html>
