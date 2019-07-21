@@ -7,7 +7,6 @@
         <form method="post" action="{{ route('home.store') }}">
             <div class="row">
                 {{ csrf_field() }}
-
                 <div class="col-sm-11">
                     <div class="form-group">
                         <label for="pesquisa" class="sr-only">Pesquisa</label>
@@ -18,6 +17,7 @@
                 <div class="col-sm-1">
                     <button type="submit" class="btn btn-primary mb-2">Buscar</button>
                 </div>
+                
             </div>
         </form>
     </div>

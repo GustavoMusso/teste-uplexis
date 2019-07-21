@@ -30,9 +30,9 @@ class HomeController extends Controller
     {
         $pesquisa = $request->get('pesquisa') ?? '';
 
-        $this->captura->buscaArtigos($pesquisa);
+        $status = $this->captura->buscaArtigos($pesquisa);
 
-        return redirect(route('home.index'));
+        return $status;
     }
 
     public function delete($id)
