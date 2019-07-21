@@ -18,13 +18,13 @@
             @forelse($artigos as $artigo)
                 <tr>
                     <td>{{ $artigo->titulo }}</td>
-                    <td>{{ $artigo->link }}</td>
+                    <td><a href="{{ $artigo->link }}">{{ $artigo->link }}</a></td>
                     <td>{{ $artigo->user->usuario }}</td>
                     <th><a href="#" class="btn btn-danger btn-xs btn-del" data-id="{{ $artigo->id }}">&times;</a></th>
                 </tr>
             @empty
                 <tr>
-                    <td colspan="4">Não há artigos</td>
+                    <td colspan="4">Não há artigos registrados!</td>
                 </tr>
             @endforelse
             </tbody>
