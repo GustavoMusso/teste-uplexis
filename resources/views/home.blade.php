@@ -1,23 +1,58 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Dashboard</div>
+    <div class="container">
+        <h1 class="text-center">Artigos</h1>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+        <table class="table table-striped table-hover">
+            <thead>
+            <tr>
+                <th>Título</th>
+                <th>Link</th>
+                <th>Usuário</th>
+                <th>Ações</th>
+            </tr>
+            </thead>
 
-                    You are logged in!
-                </div>
-            </div>
-        </div>
+            <tbody>
+            @forelse($artigos as $artigo)
+                <tr>
+                    <td>{{ $artigo->titulo }}</td>
+                    <td>{{ $artigo->link }}</td>
+                    <td>{{ $artigo->user->usuario }}</td>
+                    <th><a href="#" class="btn btn-danger btn-xs btn-del" data-id="{{ $artigo->id }}">&times;</a></th>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="4">Não há artigos</td>
+                </tr>
+            @endforelse
+            </tbody>
+        </table>
     </div>
-</div>
 @endsection
+
+@section('js')
+    <script type="text/javascript">
+        $('.btn-del').on('click', function (e) {
+            e.preventDefault();
+            const csrf = $('meta[name=csrf-token]').attr('content');
+            const id = $(this).data('id');
+
+            $.ajax({
+                contentType: 'application/x-www-form-urlencoded',
+
+                method: 'DELETE',
+                url: `http://${location.host}/home/delete/${id}`,
+
+                data: {
+                    _token: csrf
+                },
+
+                success: function (response) {
+                    location.reload();
+                }
+            });
+        });
+    </script>
+@stop

@@ -36,7 +36,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="">Buscar Artigos</a>
+                            <a class="nav-link" href="{{ route('home.create') }}">Buscar Artigos</a>
                         </li>
                     </ul>
             @endif
