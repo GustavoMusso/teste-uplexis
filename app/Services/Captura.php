@@ -17,6 +17,21 @@ class Captura
         $this->guzzleClient = new Client();
     }
 
+    public function index()
+    {
+        return $this->artigo->paginate();
+    }
+
+    public function insereArtigo($dados)
+    {
+        $this->artigo->create($dados);
+    }
+
+    public function delete($id)
+    {
+        $this->artigo->destroy($id);
+    }
+
     public function buscaArtigos(string $parametro)
     {
         try {
@@ -43,8 +58,8 @@ class Captura
 
             foreach ($matches[0] as $artigoPagina) {
                 $titulos = [];
-                preg_match_all('/class="title">([\w\W]+?)<\/div>|class="col-md-6 title">([\w\W]+?)<\/div>/i', $artigoPagina, $titulos);
-                $titulo = trim($titulos[1][0]);
+                preg_match_all('/(class="title">|class="col-md-6 title">)([\w\W]+?)<\/div>/i', $artigoPagina, $titulos);
+                $titulo = trim($titulos[2][0]);
 
                 $links = [];
                 preg_match_all('/href="([\w\W]+?)"/i', $artigoPagina, $links);
@@ -53,14 +68,14 @@ class Captura
                 $dados = [
                     'titulo' => $titulo,
                     'link' => $link,
-                    'id_usuario' => 1//Auth::user()->id,
+                    'id_usuario' => Auth::user()->id,
                 ];
 
                 $this->insereArtigo($dados);
             }
 
             return [
-                'msg' => 'Passou!',
+                'msg' => 'Artigo(s) inserido(s) com sucesso!',
                 'type' => 'success'
             ];
         } catch (\Exception $e) {
@@ -69,10 +84,5 @@ class Captura
                 'type' => 'danger',
             ];
         }
-    }
-
-    public function insereArtigo($dados)
-    {
-        $this->artigo->create($dados);
     }
 }
