@@ -12,5 +12,14 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/login');
+});
+
+Auth::routes();
+
+Route::group(['prefix' => 'home', 'middleware' => 'auth'], function () {
+    Route::get('/', 'HomeController@index')->name('home.index');
+    Route::get('/create', 'HomeController@create')->name('home.create');
+    Route::post('/store', 'HomeController@store')->name('home.store');
+    Route::delete('delete/{id}', 'HomeController@delete')->name('home.delete');
 });
