@@ -6,24 +6,26 @@ use App\Artigo;
 
 class Artigos
 {
+    private $model;
+
     public function __construct()
     {
         $this->model = new Artigo();
     }
 
-    public function buscarTudo(array $colunas = ['*'])
+    public function buscarTudo()
     {
-        return $this->model->get($colunas);
+        return $this->model->get();
     }
 
-    public function buscar(array $parametro = ['*'])
+    public function buscar(string $parametro)
     {
         return $this->model->where('id', $parametro)->get();
     }
 
-    public function paginar(int $limite = 15, array $colunas = ['*'])
+    public function paginar()
     {
-        return $this->model->paginate($limite, $colunas);
+        return $this->model->paginate();
     }
 
     public function buscarPor($campo, $valor, $colunas = ['*'])
@@ -56,10 +58,5 @@ class Artigos
     public function deletar($id)
     {
         return $this->model->destroy($id);
-    }
-
-    public function deletarPor($campo, $valor)
-    {
-        return $this->model->where($campo, $valor)->delete();
     }
 }
